@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proton - Games</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <style>
+        body {
+            background-color: #121212;
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 600;
+        }
+
+        nav {
+            background-color: #1e2742;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-family: 'Roboto Mono', monospace;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff4ec7;
+        }
+
+        
+
+        .content {
+            padding-top: 80px;
+        }
+
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .game-card {
+            background-color: #1e2742;
+            height: 250px;
+            width: 150px;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .game-icon {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: opacity 0.3s;
+        }
+
+        .game-card:hover .game-icon {
+            opacity: 0.9;
+        }
+
+        .game-name {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #e0e0e0;
+            font-weight: 500;
+            font-family: 'Fredonia One', monospace;
+        }
+
+        .search-input {
+            width: 65%;
+            padding: 12px;
+            border: 2px solid #3a3a3a;
+            border-radius: 8px;
+            background-color: #1e2742;
+            color: #ffffff;
+            font-size: 1em;
+            margin-bottom: 20px;
+            text-align: center;
+            outline: none;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: #aaaaaa;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1e2742;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+            z-index: 20;
+            width: 80%;
+            max-width: 400px;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        .popup h2 {
+            font-size: 1.5em;
+            color: #ffffff;
+        }
+
+        .popup p {
+            color: #e0e0e0;
+            font-size: 1.2em;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .popup button {
+            background-color: #ff4ec7;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup button:hover {
+            background-color: #c084fc;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/proton/index.html">Home</a></li>
+            <li><a href="/proton/assets/tools/">Tools</a></li>
+            <li><a href="">Forms</a></li>
+            <li><a id="changelogBtn">Change Log</a></li>
+        </ul>
+        
+    </nav>
+
+    <div id="changelogPopup" class="popup">
+        <h2>Proton Change Log</h2>
+        <p>More updates will be listed here as we improve the site. Stay tuned for future improvements and additions!</p>
+        <h2>Proton V2.1 Release</h2>
+        <p>Proton has been released, share it with everyone.</p>
+        <p>Lots of games has been added.</p>
+        <button id="closePopupBtn">Close</button>
+    </div>
+
+    <div class="content">
+        <h1>Last Played</h1>
+        <div class="game-container" id="lastPlayedContainer"></div>
+
+        <h1>All Games</h1>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search for games...">
+
+        <div class="game-container" id="gameContainer"></div>
+    </div>
+
+    <script>
+        const changelogBtn = document.getElementById('changelogBtn');
+        const changelogPopup = document.getElementById('changelogPopup');
+        const closePopupBtn = document.getElementById('closePopupBtn');
+        
+
+        changelogBtn.onclick = () => {
+            changelogPopup.style.display = 'block';
+        };
+
+        closePopupBtn.onclick = () => {
+            changelogPopup.style.display = 'none';
+        };
+      // +1 when update duh idiot
+        const version = "2";
+const games = [
+    { "icon": `games/2048/IMG_2647.jpeg?v=${version}`, "path": `/proton/games/2048/index.html?v=${version}`, "error": false, "name": "2048" },
+    { "icon": `games/among-us/IMG_2648.jpeg?v=${version}`, "path": `/proton/games/among-us/index.html?v=${version}`, "error": false, "name": "Among Us" },
+    { "icon": `games/angry-sharks/IMG_2649.jpeg?v=${version}`, "path": `/proton/games/angry-sharks/index.html?v=${version}`, "error": false, "name": "Angry Sharks" },
+    { "icon": `games/awesome-tanks/IMG_2634.jpeg?v=${version}`, "path": `/proton/games/awesome-tanks/index.html?v=${version}`, "error": false, "name": "Awesome Tanks" },
+    { "icon": `games/basketball-random/br.webp?v=${version}`, "path": `/proton/games/basketball-random/index.html?v=${version}`, "error": false, "name": "Basketball random" },
+    { "icon": `games/Ballistic-Chicken/IMG_2651.png?v=${version}`, "path": `/proton/games/Ballistic-Chicken/index.html?v=${version}`, "error": false, "name": "Ballistic Chicken" },
+    { "icon": `games/basketballbros/bb.png?v=${version}`, "path": `/proton/games/basketballbros/index.html?v=${version}`, "error": false, "name": "Basketball Bros" },
+    { "icon": `games/breakoid/IMG_1707.png?v=${version}`, "path": `/proton/games/breakoid/index.html?v=${version}`, "error": false, "name": "Breakoid" },
+    { "icon": `games/breakbank/images.jfif?v=${version}`, "path": `/proton/games/breakbank/index.html?v=${version}`, "error": false, "name": "Breaking The Bank" },
+    { "icon": `games/color-switch/CS.jpeg?v=${version}`, "path": `/proton/games/color-switch/index.html?v=${version}`, "error": false, "name": "Color Switch" },
+    { "icon": `games/csgo/csgo.png?v=${version}`, "path": `/proton/games/csgo/index.html?v=${version}`, "error": false, "name": "CSGO Clicker" },
+    { "icon": `games/cookie-clicker/IMG_1709.jpeg?v=${version}`, "path": `/proton/games/cookie-clicker/index.html?v=${version}`, "error": false, "name": "Cookie Clicker 🍪" },
+    { "icon": `games/yohoho/IMG_4103.jpeg?v=${version}`, "path": `/proton/games/yohoho/index.html?v=${version}`, "error": false, "name": "Yohoho" },
+    { "icon": `games/Drive-Mad/logo.jpeg?v=${version}`, "path": `/proton/games/Drive-Mad/index.html?v=${version}`, "error": false, "name": "Drive Mad" },
+    { "icon": `games/Doge-Miner/dogeminer.jpeg?v=${version}`, "path": `/proton/games/Doge-Miner/index.html?v=${version}`, "error": false, "name": "Doge Miner" },
+    { "icon": `games/OVO/IMG_1710.jpeg?v=${version}`, "path": `/proton/games/OVO/index.html?v=${version}`, "error": false, "name": "OVO" },
+    { "icon": `games/GEO-Dash/IMG_1713.png?v=${version}`, "path": `/proton/games/GEO-Dash/index.html?v=${version}`, "error": false, "name": "GEO Dash" },
+    { "icon": `games/Swoop/IMG_3096.jpeg?v=${version}`, "path": `/proton/games/Swoop/index.html?v=${version}`, "error": false, "name": "Swoop" },
+    { "icon": `games/bitlife/splash.png?v=${version}`, "path": `/proton/games/bitlife/index.html?v=${version}`, "error": false, "name": "BitLife" },
+    { "icon": `games/Retro-bowl/retro.png?v=${version}`, "path": `/proton/games/Retro-bowl/index.html?v=${version}`, "error": false, "name": "Retro Bowl" },
+    { "icon": `games/Monkey-mart/MonkeyMart.jpeg?v=${version}`, "path": `/proton/games/Monkey-mart/monkey-mart/index.html?v=${version}`, "error": false, "name": "Monkey Mart" },
+    { "icon": `games/Stickman-hook/unnamed.jpg?v=${version}`, "path": `/proton/games/Stickman-hook/index.html?v=${version}`, "error": false, "name": "Stickman Hook" },
+    { "icon": `games/Dunes/Dunes.jpeg?v=${version}`, "path": `/proton/games/Dunes/index.html?v=${version}`, "error": false, "name": "Dunes" },
+    { "icon": `games/EuroCup/splash.png?v=${version}`, "path": `/proton/games/EuroCup/index.html?v=${version}`, "error": false, "name": "EuroCup" },
+    { "icon": `games/GeoDashSubZero/IMG_0858.png?v=${version}`, "path": `/proton/games/GeoDashSubZero/index.html?v=${version}`, "error": false, "name": "GeoDash Sub Zero" },
+    { "icon": `games/IdleBreakout/img/thumbnail.png?v=${version}`, "path": `/proton/games/IdleBreakout/index.html?v=${version}`, "error": false, "name": "Idle Breakout" },
+    { "icon": `games/Subwaysurfers/img/splash.jpg?v=${version}`, "path": `/proton/games/Subwaysurfers/index.html?v=${version}`, "error": false, "name": "Subway Surfers" },
+    { "icon": `games/Coreball/IMG_4632.jpeg?v=${version}`, "path": `/proton/games/Coreball/index.html?v=${version}`, "error": false, "name": "Coreball" },
+    { "icon": `games/Red-button/bigredbutton.png?v=${version}`, "path": `/proton/games/Red-button/index.html?v=${version}`, "error": false, "name": "Red Button" },
+    { "icon": `games/Pixelgun3d/512x512.png?v=${version}`, "path": `/proton/games/Pixelgun3d/index.html?v=${version}`, "error": false, "name": "Pixel Gun 3D" },
+    { "icon": `games/Geodashworld/IMG_0856.png?v=${version}`, "path": `/proton/games/Geodashworld/index.html?v=${version}`, "error": false, "name": "GeoDash World" },
+     { "icon": `games/Defendthetank/images/splash.jpg?v=${version}`, "path": `/proton/  games/Defendthetank/index.html?v=${version}`, "error": false, "name": "Defend The Tank" },
+   { "icon": `games/Paperio2/images/icon192.png?v=${version}`, "path": `/proton/games/Paperio2/index.html?v=${version}`, "error": false, "name": "Paper.io 2" },
+    { "icon": `games/Driftboss/drift-boss.png?v=${version}`, "path": `/proton/games/Driftboss/index.html?v=${version}`, "error": false, "name": "DriftBoss" },
+      { "icon": `games/Edgesurf/splash.png?v=${version}`, "path": `/proton/games/Edgesurf/index.html?v=${version}`, "error": false, "name": "Edge Surf" },
+      { "icon": `games/Flappy2048/IMG_4646.jpeg?v=${version}`, "path": `/proton/games/Flappy2048/index.html?v=${version}`, "error": false, "name": "FlappyBird 2048" },
+         { "icon": `games/Stack/icon.png?v=${version}`, "path": `/proton/games/Stack/index.html?v=${version}`, "error": false, "name": "Stack" },
+           { "icon": `games/Territorial.io/unnamed.png?v=${version}`, "path": `/proton/games/Territorial.io/index.html?v=${version}`, "error": false, "name": "Territorial.Io" },
+           { "icon": `games/Tetris/tetris-logo.png?v=${version}`, "path": `/proton/games/Tetris/index.html?v=${version}`, "error": false, "name": "Tetris" },
+{ "icon": `games/drawhill/icons/icon-512.png?v=${version}`, "path": `/proton/games/drawhill/index.html?v=${version}`, "error": false, "name": "Draw A Hill" },
+{ "icon": `games/learntoflyidle/icon.jpg?v=${version}`, "path": `/proton/games/learntoflyidle/index.html?v=${version}`, "error": false, "name": "Learn 2 fly idle" },
+{ "icon": `games/snowbattle/img/logo.png?v=${version}`, "path": `/proton/games/snowbattle/index.html?v=${version}`, "error": false, "name": "SnowBattle" },
+{ "icon": `games/tanukisunset/capsule_616x353.jpg?v=${version}`, "path": `/proton/games/tanukisunset/index.html?v=${version}`, "error": false, "name": "Tanuki Sunset" },
+{ "icon": `games/tinyfishing/thumb.png?v=${version}`, "path": `/proton/games/tinyfishing/index.html?v=${version}`, "error": false, "name": "Tiny Fishing" },
+{ "icon": `games/GunSpin/IMG_2653.jpeg?v=${version}`, "path": `/proton/games/GunSpin/index.html?v=${version}`, "error": false, "name": "Gunspin" },
+{ "icon": `games/boxing-random/512x340.jpg?v=${version}`, "path": `/proton/games/boxing-random/index.html?v=${version}`, "error": false, "name": "Boxing Random" },
+{ "icon": `games/Getaway/IMG_2654.jpeg?v=${version}`, "path": `/proton/games/Getaway/index.html?v=${version}`, "error": false, "name": "getaway shootout" },
+{ "icon": `games/soccer-random/test.png?v=${version}`, "path": `/proton/games/soccer-random/index.html?v=${version}`, "error": false, "name": "Soccer Random" },
+{ "icon": `games/chamber/IMG_2664_enhanced.jpeg.png?v=${version}`, "path": `/proton/games/chamber/index.html?v=${version}`, "error": false, "name": "Creative Kill Chamber" },
+{ "icon": `games/8ball/IMG_2666.png?v=${version}`, "path": `/proton/games/8ball/index.html?v=${version}`, "error": false, "name": "8 Ball Pool" },
+{ "icon": `games/BlumgiSlime/IMG_2665.jpeg?v=${version}`, "path": `/proton/games/BlumgiSlime/index.html?v=${version}`, "error": false, "name": "Blumgi Slime" },
+{ "icon": `games/break-lock/IMG_2669.png?v=${version}`, "path": `/proton/games/break-lock/index.html?v=${version}`, "error": false, "name": "BreakLock" },
+{ "icon": `games/tunnelrush/IMG_2670.jpeg?v=${version}`, "path": `/proton/games/tunnelrush/index.html?v=${version}`, "error": false, "name": "Tunnel Rush" },
+{ "icon": `games/blumgi-ball/IMG_2671.jpeg?v=${version}`, "path": `/proton/games/blumgi-ball/index.html?v=${version}`, "error": false, "name": "Blumgi Ball" },
+{ "icon": `games/BlumgiRocket/IMG_2672.jpeg?v=${version}`, "path": `/proton/games/BlumgiRocket/index.html?v=${version}`, "error": false, "name": "Blumgi Rocket" },
+{ "icon": `games/Smallworldcup/icon-256.png?v=${version}`, "path": `/proton/games/Smallworldcup/index.html?v=${version}`, "error": false, "name": "The Small World" },
+{ "icon": `games/roblox/IMG_2686.jpeg?v=${version}`, "path": `/proton/games/games/roblox/index.html?v=${version}`, "error": false, "name": "Roblox" },
+
+
+    
+        ];
+
+        const gameContainer = document.getElementById('gameContainer');
+        const lastPlayedContainer = document.getElementById('lastPlayedContainer');
+        const searchInput = document.getElementById('searchInput');
+
+
+        function loadLastPlayedGames() {
+            const lastPlayed = JSON.parse(localStorage.getItem('@proton/lp')) || [];
+            lastPlayed.forEach(({ icon, path, name }) => {
+                createGameCard(lastPlayedContainer, icon, path, name, false);
+            });
+        }
+
+        function createGameCard(container, icon, path, name, error) {
+            const gameCard = document.createElement('div');
+            gameCard.className = 'game-card';
+            gameCard.onclick = () => {
+                if (!error) {
+                    localStorage.setItem('@proton/path', path);
+                    saveLastPlayedGame({ icon, path, name });
+                    window.location.href = path;
+                } else {
+                    alert('Error: This game is unavailable.');
+                }
+            };
+
+            const gameIcon = document.createElement('img');
+            gameIcon.src = icon;
+            gameIcon.alt = name;
+            gameIcon.className = 'game-icon';
+
+            const gameName = document.createElement('div');
+            gameName.className = 'game-name';
+            gameName.innerText = name;
+
+            gameCard.append(gameIcon, gameName);
+            container.appendChild(gameCard);
+        }
+
+        function saveLastPlayedGame(game) {
+            const lastPlayed = JSON.parse(localStorage.getItem('@proton/lp')) || [];
+            const existingIndex = lastPlayed.findIndex(item => item.path === game.path);
+            if (existingIndex !== -1) {
+                lastPlayed.splice(existingIndex, 1);
+            }
+            lastPlayed.unshift(game);
+            localStorage.setItem('@proton/lp', JSON.stringify(lastPlayed.slice(0, 5)));
+        }
+
+        function loadAllGames() {
+            games.forEach(({ icon, path, name, error }) => {
+                createGameCard(gameContainer, icon, path, name, error);
+            });
+        }
+
+        function filterGames() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const allGameCards = document.querySelectorAll('.game-card');
+
+            allGameCards.forEach(card => {
+                const gameName = card.querySelector('.game-name').innerText.toLowerCase();
+                card.style.display = gameName.includes(searchTerm) ? '' : 'none';
+            });
+        }
+
+
+        searchInput.addEventListener('input', filterGames);
+
+
+
+        loadLastPlayedGames();
+        loadAllGames();
+    </script>
+</body>
+</html>

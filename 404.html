@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proton - 404 Not Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #121212;
+      font-family: 'Poppins', sans-serif;
+      color: #ffffff;
+      overflow: hidden;
+      text-align: center;
+    }
+    .not-found-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-size: 2.5em;
+      color: #f8f8f8;
+      letter-spacing: 1px;
+    }
+    .not-found-container div:first-child {
+      font-weight: 400;
+      margin-bottom: 10px;
+      color: #9e9e9e;
+    }
+    .highlight {
+      background: linear-gradient(90deg, #ff4ec7, #c084fc, #0073ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 600;
+    }
+    .back-button {
+      margin-top: 30px;
+      padding: 12px 28px;
+      font-size: 1.2em;
+      font-weight: 600;
+      color: #ffffff;
+      background: linear-gradient(90deg, #4c4c66, #6a0572);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.4s, transform 0.2s ease-in-out;
+    }
+    .back-button:hover {
+      background: linear-gradient(90deg, #6a0572, #4c4c66);
+      transform: translateY(-2px);
+    }
+    .back-button:focus {
+      outline: none;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="not-found-container">
+    <div>Oops! It seems you are lost.</div>
+    <div class="highlight">404 - Page Not Found</div>
+    <div>The page you are looking for doesn't exist.</div>
+    <button class="back-button" onclick="goHome()">Back Home</button>
+  </div>
+
+  <script>
+    function goHome() {
+      window.location.href = "../index.html";  // Adjust path as needed for the home page
+    }
+  </script>
+</body>
+</html>
