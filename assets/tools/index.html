@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proton - Options</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Roboto+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Roboto Mono', monospace;
+            font-weight: 600;
+        }
+
+        nav {
+            background-color: #1e2742;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1.2em;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-family: 'Roboto Mono', monospace;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ff4ec7;
+        }
+
+        .content {
+            padding-top: 80px;
+        }
+
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .game-card {
+            background-color: #1e2742;
+            height: 250px;
+            width: 150px;
+            border-radius: 12px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .game-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        .game-icon {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: opacity 0.3s;
+        }
+
+        .game-card:hover .game-icon {
+            opacity: 0.9;
+        }
+
+        .game-name {
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #e0e0e0;
+            font-weight: 500;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        .search-input {
+            width: 65%;
+            padding: 12px;
+            border: 2px solid #3a3a3a;
+            border-radius: 8px;
+            background-color: #1e2742;
+            color: #ffffff;
+            font-size: 1em;
+            margin-bottom: 20px;
+            text-align: center;
+            outline: none;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #ffffff;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: #aaaaaa;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #1e2742;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+            z-index: 20;
+            width: 80%;
+            max-width: 400px;
+            overflow-y: auto;
+            max-height: 80vh;
+        }
+
+        .popup h2 {
+            font-size: 1.5em;
+            color: #ffffff;
+        }
+
+        .popup p {
+            color: #e0e0e0;
+            font-size: 1.2em;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .popup button {
+            background-color: #ff4ec7;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .popup button:hover {
+            background-color: #c084fc;
+        }
+
+        /* Button Styles for Cheats and Tools */
+        .cheats-btn, .tools-btn {
+            display: inline-block;
+            background-color: #ff4ec7;
+            color: #ffffff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.5em;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-family: 'Roboto Mono', monospace;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s ease;
+            margin: 10px;
+            text-align: center;
+            text-decoration: none; /* Remove underline */
+        }
+
+        .cheats-btn:hover, .tools-btn:hover {
+            background-color: #c084fc;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+<div class="content">
+    <h1>Choose an option below.</h1>
+    <!-- Links styled like Buttons -->
+    <a href="/proton/assets/tools/cheats/" class="cheats-btn">
+        Cheats
+    </a>
+    <a href="/proton/assets/tools/shortcuts/" class="tools-btn">
+        Shortcuts
+    </a>
+</div>
+
+</body>
+</html>
